@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index{% endblock %}
+
+{% block body %}
+    <h1>Index</h1>
+
+    <style>
+        img { max-height: 10em; }
+    </style>
+
+    <table class="table table-striped table-hover">
+        {% for promotion in promotions %}
+            <tbody onclick="location.href='{{ path('edit', { promotion: promotion.id }) }}'">
+                <tr>
+                    <td>{{ promotion.id }}</td>
+                    <td>{{ vich_uploader_asset(promotion, 'images.thumbnail') }}</td>
+                    <td>{{ vich_uploader_asset(promotion, 'images.banners.largeRectangle') }}</td>
+                    <td>{{ vich_uploader_asset(promotion, 'images.banners.largeSkyscraper') }}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        {% set image = vich_uploader_asset(promotion, 'images.thumbnail') %}
+                        {% if image %}<img src="{{ image }}">{% endif %}
+                    </td>
+                    <td>
+                        {% set image = vich_uploader_asset(promotion, 'images.banners.largeRectangle') %}
+                        {% if image %}<img src="{{ image }}">{% endif %}
+                    </td>
+                    <td>
+                        {% set image = vich_uploader_asset(promotion, 'images.banners.largeSkyscraper') %}
+                        {% if image %}<img src="{{ image }}">{% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+
+    <p><a href="{{ path('new') }}" class="btn btn-primary">New</a></p>
+{% endblock %}

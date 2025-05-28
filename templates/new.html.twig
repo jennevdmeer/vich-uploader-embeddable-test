@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New{% endblock %}
+
+{% block body %}
+    <h1>{{ block('title') }}</h1>
+
+    <style>img { max-width: 100px; max-height: 100px; }</style>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+
+        <div class="btn-group">
+            <button class="btn btn-primary">{{ block('title') }}</button>
+            <a href="{{ path('index') }}" class="btn btn-light">Index</a>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}
