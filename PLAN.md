@@ -64,22 +64,25 @@ Covers `Promotion` > `Images` > `Banners` (two levels of nesting).
 On `feature-vich-orm-embedded-wip`.
 
 - [x] Fix whatever steps 2 and 3 turn up.
-- [ ] `isEmbeddable()` in `VichFileType` reflects the object on every form build; decide whether
-  embeddable status should come from metadata instead.
-- [ ] YAML/XML drivers: either add dotted paths support (`propertyName: images.banners.largeRectangle`)
-  or list them as out of scope.
-- [ ] Tests:
-  - [ ] `AttributeDriverTest`: missing `class` with untyped property throws
-    `DoctrineEmbeddedTypeNotFound`; non-existent class throws.
-  - [ ] Form type tests (`tests/Form/Type`) for an embedded field: field name, delete, download URI.
-  - [ ] Functional test with an embeddable fixture in `tests/Fixtures/TestBundle` if the
-    SQLite-backed functional suite can run (needs `pdo_sqlite` enabled locally).
-- [ ] `docs/embeddables.md`, linked from `docs/index.md`.
+- [x] `isEmbeddable()` in `VichFileType`: cached per class. Attribute versus Doctrine metadata is a
+  question for the maintainers in `PR.md`.
+- [ ] YAML/XML drivers: listed as out of scope in `docs/embeddables.md` and `PR.md`; revisit if the
+  maintainers want it in this PR.
+- [x] Tests:
+  - [x] `AttributeDriverTest`: builtin-typed property without `class` and non-existent class throw
+    `DoctrineEmbeddedTypeNotFound`.
+  - [x] Form type tests: root entity resolution, delete, embeddable as root form data (fixed a crash
+    there).
+  - [ ] Functional test with an embeddable fixture in `tests/Fixtures/TestBundle`: not added; ask the
+    maintainers whether they want one on top of the unit tests.
+- [x] `docs/embeddables.md`, linked from `docs/index.md`.
 
 ## 5. Quality checks
 
-- [ ] `vendor/bin/phpunit` (enable `pdo_sqlite` in `php.ini` so the functional suite runs).
-- [ ] PHPStan as configured in the bundle's CI.
+- [x] `vendor/bin/phpunit`: run with `php -d extension=pdo_sqlite -d extension=sqlite3`. All pass
+  except the three `FileSystemStorageTest::uploadedFileIsCorrectlyMoved` cases, which fail on Windows
+  path separators on `master` as well.
+- [x] PHPStan as configured in the bundle's CI: no errors.
 - [ ] Run php-cs-fixer / twig-cs-fixer yourself as the bundle's CI does.
 
 ## 6. Symfony 8
@@ -90,10 +93,7 @@ On `feature-vich-orm-embedded-wip`.
 
 ## 7. PR description
 
-- [ ] Rewrite per the review notes: `AttributeDriver` instead of `AnnotationDriver`, the actual
-  `#[Vich\Uploadable]` requirement from step 3, `updatedAt` inside the embeddable as a usage rule,
-  concrete out-of-scope list, `Fixes #866`, questions for maintainers, typos.
-- [ ] New title: "Support uploadable fields in Doctrine ORM embeddables".
+- [x] Draft in `PR.md`, title as its heading. Review before posting.
 
 ## 8. Publish
 
