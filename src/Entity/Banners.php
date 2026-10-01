@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Attribute as Vich;
 
 #[ORM\Embeddable]
+#[Vich\Uploadable]
 class Banners
 {
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]

@@ -12,6 +12,7 @@ use Vich\UploaderBundle\Entity\File as EmbeddedFile;
 use Vich\UploaderBundle\Mapping\Attribute as Vich;
 
 #[ORM\Embeddable]
+#[Vich\Uploadable]
 class Images
 {
     #[Vich\UploadableField(mapping: 'thumbnail', fileNameProperty: 'thumbnailName')]
