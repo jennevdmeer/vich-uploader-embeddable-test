@@ -44,26 +44,26 @@ Covers `Promotion` > `Images` > `Banners` (two levels of nesting).
 
 ## 3. Settle the open questions
 
-- [ ] **`#[Vich\Uploadable]` on embeddables.** `AttributeDriver` only checks it on the root entity.
-  Remove it from `Images` and `Banners` and repeat step 2. If everything works, the PR text drops the
-  requirement.
-- [ ] **Triggering the listener.** An upload inside an embeddable needs a mapped column in that
-  embeddable to change (`Banners::$modifiedAt`, `Images::$updatedAt`). Confirm that an upload with
-  only that column changing is persisted, and that one without it is not.
-- [ ] **Private properties.** `Banners::$largeRectangle` is private with getter/setter; confirm the
-  dotted property path resolves through the accessors.
-- [ ] **Nullable embeddable.** An `?Images` that is `null` on the entity: confirm forms and
-  `vich_uploader_asset` do not fail.
-- [ ] **`Vich\UploaderBundle\Entity\File` as embeddable** inside an embeddable: works or documented as
-  unsupported.
-- [ ] **Cleanup command.** `bin/console vich:cleanup --dry-run` keeps files referenced by dotted
-  fields and lists real orphans.
+- [x] **`#[Vich\Uploadable]` on embeddables.** Not needed: only the root entity carries it. Create,
+  replace and delete work with it removed from `Images` and `Banners`.
+- [x] **Triggering the listener.** An upload inside an embeddable needs a mapped column in that
+  embeddable to change (`Banners::$modifiedAt`, `Images::$updatedAt`). Without it the upload is
+  dropped, the same rule as for plain entities.
+- [x] **Private properties.** `Banners::$largeRectangle` (private, getter/setter) resolves through the
+  accessors.
+- [x] **Nullable embeddable.** Crashed in `PropertyMapping` (`UnexpectedTypeException` traversing
+  `null`). Fixed on the WIP branch: reads return `null`, writes are skipped.
+- [x] **`Vich\UploaderBundle\Entity\File` as embeddable** inside an embeddable: works for
+  `Images::$attachment` once all mapped properties get the embedded path prefix (fixed on the WIP
+  branch; only `fileNameProperty` was prefixed).
+- [x] **Cleanup command.** `vich:cleanup --dry-run --min-age=0` counts the dotted-field references and
+  lists a planted orphan.
 
 ## 4. Fill the gaps in the bundle
 
 On `feature-vich-orm-embedded-wip`.
 
-- [ ] Fix whatever steps 2 and 3 turn up.
+- [x] Fix whatever steps 2 and 3 turn up.
 - [ ] `isEmbeddable()` in `VichFileType` reflects the object on every form build; decide whether
   embeddable status should come from metadata instead.
 - [ ] YAML/XML drivers: either add dotted paths support (`propertyName: images.banners.largeRectangle`)
