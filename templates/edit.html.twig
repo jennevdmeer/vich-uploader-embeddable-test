@@ -1,3 +1,12 @@
 {% extends 'new.html.twig' %}
 
 {% block title %}Edit{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+
+    <form method="post" action="{{ path('delete', { promotion: promotion.id }) }}" class="mt-3">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete-promotion-' ~ promotion.id) }}">
+        <button class="btn btn-danger">Delete</button>
+    </form>
+{% endblock %}

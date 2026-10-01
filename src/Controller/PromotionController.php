@@ -65,6 +65,18 @@ class PromotionController extends AbstractController
 
         return $this->render('edit.html.twig', [
             'form' => $form,
+            'promotion' => $promotion,
         ]);
+    }
+
+    #[Route('/{promotion<\d+>}/delete', name: 'delete', methods: ['POST'])]
+    public function delete(EntityManagerInterface $entityManager, Request $request, Promotion $promotion): Response
+    {
+        if ($this->isCsrfTokenValid('delete-promotion-'.$promotion->id, $request->request->getString('_token'))) {
+            $entityManager->remove($promotion);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('index');
     }
 }
