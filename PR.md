@@ -1,5 +1,7 @@
 # Support uploadable fields in Doctrine ORM embeddables
 
+> This description and the implementation were rewritten with Claude, based on my initial draft of this PR.
+
 Fixes #866, following the discussion in #350.
 
 Uploadable fields can live inside Doctrine ORM embeddables, including embeddables nested in other
@@ -49,7 +51,7 @@ reach, since the embeddable has no reference to the entity.
   name, dimensions), profiler mapping panel, `vich:mapping:debug-class` and `vich:cleanup`.
 
 ![formtype](https://github.com/user-attachments/assets/245d28c2-abe4-484b-9ca7-6736c88e04e2)
-![profiler](https://github.com/user-attachments/assets/9b08ca95-af19-429f-9bfe-4de1f4ee9e55)
+![profiler](https://github.com/user-attachments/assets/aa7f4b8f-e441-4fd0-97e5-f107ebda296f)
 
 ## Out of scope
 
