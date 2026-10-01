@@ -84,7 +84,9 @@ On `feature-vich-orm-embedded-wip`.
 
 ## 6. Symfony 8
 
-- [ ] Switch the test project to `8.0.*` and repeat step 2.
+- [x] Switch the test project to Symfony 8 and repeat step 2. Runs on `8.1.*` (maker-bundle needs
+  `^8.1`), DBAL 4, DoctrineBundle 3; create, replace, delete, entity removal and
+  `vich_uploader_asset` pass.
 
 ## 7. PR description
 
